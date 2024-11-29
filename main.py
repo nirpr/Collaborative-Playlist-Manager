@@ -29,9 +29,9 @@ def user_data(user_id: str):
     if user_id not in user_store:
         raise HTTPException(status_code=404, detail="User not found")
 
-    user_data = user_store[user_id].get_user_data()
+    user = user_store[user_id]
 
-    return {"user_data": user_data}
+    return {"user_data": user.get_user_data(), "user_top_tracks": user.get_user_top_tracks()}
 
 
 
