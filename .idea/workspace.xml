@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="Added fetching top tracks and saving them to user.&#10;also made data members and methods as private in user.">
-      <change afterPath="$PROJECT_DIR$/app/User_store.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.py" afterDir="false" />
+    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="Added User_store class">
+      <change beforePath="$PROJECT_DIR$/app/User_store.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/User_store.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +77,14 @@
       <option name="project" value="LOCAL" />
       <updated>1732901683005</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added User_store class">
+      <created>1732903214998</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732903214998</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -98,6 +103,7 @@
     <MESSAGE value="xcgga" />
     <MESSAGE value="Added class User and added a method to get_user_data." />
     <MESSAGE value="Added fetching top tracks and saving them to user.&#10;also made data members and methods as private in user." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added fetching top tracks and saving them to user.&#10;also made data members and methods as private in user." />
+    <MESSAGE value="Added User_store class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added User_store class" />
   </component>
 </project>

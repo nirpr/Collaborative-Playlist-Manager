@@ -27,10 +27,10 @@ def callback(code: str):
 
 @app.get("/user/{user_id}")
 def user_data(user_id: str):
-    if user_id not in user_store:
-        raise HTTPException(status_code=404, detail="User not found")
-
     user = user_store.get_user(user_id)
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
 
     return {"user_data": user.get_user_data(), "user_top_tracks": user.get_user_top_tracks()}
 
