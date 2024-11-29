@@ -21,15 +21,18 @@ class User:
     def __fetch_user_data_api(self):
         return self.__sp.current_user()
 
-    def __fetch_user_top_tracks_api(self):
+    def __fetch_user_top_tracks_api(self, limit=10):
         try:
-            response = self.__sp.current_user_top_tracks(10)
+            response = self.__sp.current_user_top_tracks(limit)
             tracks = [{"name": item["name"],
                        "artist": item["artists"][0]["name"],
                        "id": item["id"]}
                       for item in response['items']]
 
             return tracks
+        except spotipy.exceptions.SpotifyException as e:
+            print(f"Spotify API error: {e}")
+            return []
         except Exception as e:
             print(f"Error fetching top tracks: {e}")
             return []
