@@ -9,6 +9,6 @@ class UserStore:
     def add_user(self, user):
         self.__users_dict[user.get_user_id()] = user
 
-    def get_num_of_user(self):
+    def get_num_of_users(self):
         return len(self.__users_dict)
 
