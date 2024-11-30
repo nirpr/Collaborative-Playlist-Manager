@@ -4,7 +4,6 @@ from app.User import User
 from app.User_store import UserStore
 from app.PlayList import PlayList
 from fastapi.responses import RedirectResponse
-import uuid
 
 app = FastAPI()
 user_store = UserStore()
@@ -20,8 +19,11 @@ def login():
 @app.get("/callback")
 def callback(code: str):
     access_token = get_access_token(code)
-    user_id = str(uuid.uuid4())
-    user = User(user_id, access_token)
+    user = User(access_token)
+
+    if user_store.get_num_of_users() < 1:
+        playlist.set_manager(user)
+
     user_store.add_user(user)
     playlist.add_top_songs_of_user(user.get_user_top_tracks(), user.get_user_id())
 
@@ -40,7 +42,7 @@ def user_data(user_id: str):
 
 @app.get("/playlist")
 def get_playlist():
-    return {'playlist': playlist}
+    return {'playlist': playlist.get_songs_dict()}
 
 
 @app.post("/upvote/{track_id}")
@@ -51,13 +53,26 @@ def upvote_song(track_id):
 
     playlist.upvote_song(track_id)
 
-    return {'song upvoted successfully - playlist': playlist}
+    return {'song upvoted successfully - playlist': playlist.get_songs_dict()}
 
 
 @app.get("/next_song")
 def get_next_song():
     next_song, num_of_votes = playlist.get_next_song()
     return {"The next song is:": next_song, "votes": num_of_votes}
+
+
+@app.post("/create_playlist")
+def create_playlist_on_spotify():
+    try:
+        playlist.create_playlist_on_spotify()
+        playlist.add_songs_to_remote_playlist()
+
+        return {'remote playlist created': playlist.show_remote_playlist()}
+    except Exception as e:
+        return {'exception thrown': e}
+
+
 
 
 

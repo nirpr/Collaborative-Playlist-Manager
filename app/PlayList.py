@@ -1,8 +1,11 @@
+from app.User import User
 
 
 class PlayList:
     def __init__(self):
         self.__songs = {}
+        self.__manager = None
+        self.__playlist_id = None
 
     def get_songs_dict(self):
         return self.__songs
@@ -28,4 +31,19 @@ class PlayList:
 
         return highest_voted, num_of_votes
 
+    def get_manager(self):
+        return self.__manager
+
+    def set_manager(self, user: User):
+        self.__manager = user
+
+    def create_playlist_on_spotify(self):
+        if self.__manager and not self.__playlist_id:
+            self.__playlist_id = self.__manager.create_playlist_in_manager()
+
+    def add_songs_to_remote_playlist(self):
+        self.__manager.add_songs_in_manager(self.__playlist_id, self.__songs)  # handle errors
+
+    def show_remote_playlist(self):
+        return self.__manager.show_remote_playlist(self.__playlist_id)
 
