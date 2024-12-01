@@ -5,7 +5,7 @@ import spotipy
 class User:
     def __init__(self, access_token):
         self.__access_token = access_token
-        self.__sp = spotipy.Spotify(auth=self.__access_token)
+        self.__sp = spotipy.Spotify(auth=self.__access_token, requests_session=False)
         self.__user_id = self.__sp.me()['id']
         self.__user_data = self.__fetch_user_data_api()
         self.__user_top_tracks = self.__fetch_user_top_tracks_api()

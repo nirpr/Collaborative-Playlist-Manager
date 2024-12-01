@@ -12,6 +12,7 @@ playlist = PlayList()
 
 @app.get('/')
 def login():
+
     auth_url = get_auth_url()
     return RedirectResponse(auth_url)
 
@@ -19,6 +20,7 @@ def login():
 @app.get("/callback")
 def callback(code: str):
     access_token = get_access_token(code)
+    print(f"Received code: {code}\n access_token: {access_token}")
     user = User(access_token)
 
     if user_store.get_num_of_users() < 1:
@@ -70,9 +72,12 @@ def create_playlist_on_spotify():
 
         return {'remote playlist created': playlist.show_remote_playlist()}
     except Exception as e:
-        return {'exception thrown': e}
+        return {'exception thrown': str(e)}
 
 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 
 
 
