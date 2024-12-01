@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Playlist Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Collaborative Playlist Manager</h1>
+    </header>
+
+    <section id="show-playlist">
+        <h2>Current Playlist</h2>
+        <ul id="playlist-list">
+            <!-- Playlist items will be added here dynamically -->
+        </ul>
+    </section>
+
+    <section id="create-playlist">
+        <h2>Create a New Playlist</h2>
+    </section>
+
+    <section id="vote-song">
+        <h2>Vote for Song</h2>
+        <ul id="song-list">
+            <!-- Song items with vote buttons will be added here dynamically -->
+        </ul>
+    </section>
+
+    <section id="next-song">
+        <h2>Next Song</h2>
+        <button onclick="getNextSong()">Get Next Song</button>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
