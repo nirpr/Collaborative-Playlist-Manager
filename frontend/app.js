@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const playlistDescriptionInput = document.getElementById('playlist-description');
     const songList = document.getElementById('song-list');
     const userId = 'user-id'; // Replace with actual user ID
+    const backendUrl = "http://127.0.0.1:8000"; 
 
-    fetch('/')
+    fetch(`${backendUrl}/login`)  // todo: need to make sure we redirect correctlly
     .then(response => response.json())
     .then(data => {
         // Redirect the user to the login URL
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Fetch current playlist
-    fetch('/playlist')
+    fetch(`${backendUrl}/playlist`)  // todo: need to make it on commend and not immediately 
         .then(response => response.json())
         .then(data => {
             data.playlist.forEach(song => {
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             description: playlistDescriptionInput.value
         };
 
-        fetch('/create_playlist', {
+        fetch(`${backendUrl}/create_playlist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch next song in playlist
     function getNextSong() {
-        fetch('/next_song')
+        fetch(`${backendUrl}/next_song`)
             .then(response => response.json())
             .then(data => {
                 alert(`Next song: ${data['The next song is:']} with ${data.votes} votes.`);
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fetch user data
-    fetch(`/user/${userId}`)
+    fetch(`${backendUrl}/user/${userId}`)
         .then(response => response.json())
         .then(data => {
             console.log(data.user_data); // Display user data as needed
