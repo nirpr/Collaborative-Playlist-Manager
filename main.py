@@ -23,7 +23,6 @@ playlist = PlayList()
 
 @app.get('/login')
 def login():
-
     auth_url = get_auth_url()
     return {"loginUrl": auth_url}
 

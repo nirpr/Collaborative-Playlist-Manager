@@ -26,24 +26,4 @@ def get_access_token(code: str):
     return token_info["access_token"]
 
 
-# maybe later save tokens in file.
-
-# def save_tokens_to_file(access_token: str, refresh_token: str):
-#     tokens = {
-#         "access_token": access_token,
-#         "refresh_token": refresh_token
-#     }
-#
-#     with open("tokens.json", "w") as f:
-#         json.dump(tokens, f)
-#
-#
-# def load_tokens_from_file():
-#     try:
-#         with open("tokens.json", "r") as f:
-#             tokens = json.load(f)
-#         return tokens.get("access_token"), tokens.get("refresh_token")
-#     except FileNotFoundError:
-#         return None, None
-
 
