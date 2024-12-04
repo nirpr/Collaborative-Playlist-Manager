@@ -24,7 +24,8 @@ playlist = PlayList()
 @app.get('/login')
 def login():
     auth_url = get_auth_url()
-    return {"loginUrl": auth_url}
+    # return {"loginUrl": auth_url}
+    return RedirectResponse(url=auth_url)
 
 
 @app.get("/callback")
@@ -38,8 +39,9 @@ def callback(code: str):
     user_store.add_user(user)
     playlist.add_top_songs_of_user(user.get_user_top_tracks(), user.get_user_id())
 
-    redirect_url = f"{FRONTEND_URL}?user_id={user.get_user_id()}"
-    return RedirectResponse(url=redirect_url)
+    # redirect_url = f"{FRONTEND_URL}?user_id={user.get_user_id()}"
+    # return RedirectResponse(url=redirect_url)
+    return {"successfully logged in": user.get_user_id()}
 
 
 @app.get("/user/{user_id}")  # maybe delete
@@ -57,6 +59,12 @@ def get_playlist():
     return {'playlist': playlist.get_songs_dict()}
 
 
+@app.get("/next_song")
+def get_next_song():
+    next_song, num_of_votes = playlist.get_next_song()
+    return {"The next song is:": next_song, "votes": num_of_votes}
+
+
 @app.post("/upvote/{track_id}")
 def upvote_song(track_id):
 
@@ -68,19 +76,19 @@ def upvote_song(track_id):
     return {'song upvoted successfully - playlist': playlist.get_songs_dict()}
 
 
-@app.get("/next_song")
-def get_next_song():
-    next_song, num_of_votes = playlist.get_next_song()
-    return {"The next song is:": next_song, "votes": num_of_votes}
-
-
 @app.post("/create_playlist")
 def create_playlist_on_spotify():
     try:
         playlist.create_playlist_on_spotify()
-        playlist.add_songs_to_remote_playlist()
-
         return {'remote playlist created': playlist.show_remote_playlist()}
+    except Exception as e:
+        return {'exception thrown': str(e)}
+
+
+@app.post("/add_songs_to_playlist")
+def add_songs_to_playlist():
+    try:
+        playlist.add_songs_to_remote_playlist()
     except Exception as e:
         return {'exception thrown': str(e)}
 
