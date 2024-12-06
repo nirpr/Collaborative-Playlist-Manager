@@ -6,6 +6,9 @@ class UserStore:
     def get_user(self, user_id):
         return self.__users_dict.get(user_id)
 
+    def get_users_dict(self):
+        return self.__users_dict
+
     def add_user(self, user):
         self.__users_dict[user.get_user_id()] = user
 

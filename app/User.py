@@ -22,7 +22,7 @@ class User:
     def __fetch_user_data_api(self):
         return self.__sp.current_user()
 
-    def __fetch_user_top_tracks_api(self, limit=10):
+    def __fetch_user_top_tracks_api(self, limit=20):
         try:
             response = self.__sp.current_user_top_tracks(limit)
             tracks = [{"name": item["name"],

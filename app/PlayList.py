@@ -20,7 +20,7 @@ class PlayList:
                                          'user_id': user_id,
                                          'votes': 0}
 
-    def add_top_songs_of_user(self, track_lst, user_id):
+    def add_user_songs_to_playlist(self, track_lst, user_id):
         for track in track_lst:
             self.__add_song(track, user_id)
 

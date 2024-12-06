@@ -6,6 +6,7 @@ from app.User import User
 from app.User_store import UserStore
 from app.PlayList import PlayList
 from fastapi.responses import RedirectResponse
+from random import sample
 
 app = FastAPI()
 app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
@@ -37,21 +38,10 @@ def callback(code: str):
         playlist.set_manager(user)
 
     user_store.add_user(user)
-    playlist.add_top_songs_of_user(user.get_user_top_tracks(), user.get_user_id())
 
     # redirect_url = f"{FRONTEND_URL}?user_id={user.get_user_id()}"
     # return RedirectResponse(url=redirect_url)
     return {"successfully logged in": user.get_user_id()}
-
-
-@app.get("/user/{user_id}")  # maybe delete
-def user_data(user_id: str):
-    user = user_store.get_user(user_id)
-
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-
-    return {"user_data": user.get_user_data(), "user_top_tracks": user.get_user_top_tracks()}
 
 
 @app.get("/playlist")
@@ -63,6 +53,22 @@ def get_playlist():
 def get_next_song():
     next_song, num_of_votes = playlist.get_next_song()
     return {"The next song is:": next_song, "votes": num_of_votes}
+
+
+@app.post("/generate_playlist")
+def generate_playlist():
+    num_of_songs_per_user = 10 // user_store.get_num_of_users()
+
+    if user_store.get_num_of_users() > 10:
+        selected_users = sample(list(user_store.get_users_dict().values()), 10)
+    else:
+        selected_users = list(user_store.get_users_dict().values())
+
+    for user in selected_users:
+        selected_songs = sample(user.get_user_top_tracks(), num_of_songs_per_user)
+        playlist.add_user_songs_to_playlist(selected_songs, user.get_user_id())
+
+    return {'selected playlist': playlist.get_songs_dict()}
 
 
 @app.post("/upvote/{track_id}")
