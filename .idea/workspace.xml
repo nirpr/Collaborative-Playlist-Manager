@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch.">
-      <change beforePath="$PROJECT_DIR$/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.cache" afterDir="false" />
+    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/PlayList.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/PlayList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User_store.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/User_store.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1733310380436</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user.">
+      <created>1733526199600</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733526199600</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,7 +184,8 @@
     <MESSAGE value="now the client and server talks to each other but still has problems with redirecting after login." />
     <MESSAGE value="deleted unnecessary comments" />
     <MESSAGE value="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch." />
+    <MESSAGE value="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user." />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

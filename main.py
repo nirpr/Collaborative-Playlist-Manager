@@ -65,6 +65,8 @@ def generate_playlist():
         selected_users = list(user_store.get_users_dict().values())
 
     for user in selected_users:
+        if len(user.get_user_top_tracks()) < num_of_songs_per_user:
+            num_of_songs_per_user = len(user.get_user_top_tracks())
         selected_songs = sample(user.get_user_top_tracks(), num_of_songs_per_user)
         playlist.add_user_songs_to_playlist(selected_songs, user.get_user_id())
 
