@@ -1,5 +1,5 @@
 from app.User import User
-
+from collections import OrderedDict
 
 class PlayList:
     def __init__(self):
@@ -8,6 +8,7 @@ class PlayList:
         self.__playlist_id = None
 
     def get_songs_dict(self):
+        self.__reorder_by_votes()
         return self.__songs
 
     def get_songs_list(self):  # will use later for printing nicely
@@ -19,6 +20,9 @@ class PlayList:
                                          'artist': track['artist'],
                                          'user_id': user_id,
                                          'votes': 0}
+
+    def __reorder_by_votes(self):
+        self.__songs = OrderedDict(sorted(self.__songs.items(), key=lambda item: item[1]['votes'], reverse=True))
 
     def add_user_songs_to_playlist(self, track_lst, user_id):
         for track in track_lst:
@@ -52,7 +56,7 @@ class PlayList:
             raise Exception({"message": "playlist already exists"})
 
     def add_songs_to_remote_playlist(self):
-        if not self.__playlist_id and self.__songs:
+        if self.__playlist_id and self.__songs:
             self.__manager.add_songs_in_manager(self.__playlist_id, self.__songs)  # handle errors
         else:
             raise Exception({"message": "playlist does not exists"})

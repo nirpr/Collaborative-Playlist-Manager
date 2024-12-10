@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user.">
+    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has.">
+      <change beforePath="$PROJECT_DIR$/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/PlayList.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/PlayList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1733526199600</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has.">
+      <created>1733575194757</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733575194757</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,9 +195,24 @@
     <MESSAGE value="deleted unnecessary comments" />
     <MESSAGE value="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch." />
     <MESSAGE value="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user." />
+    <MESSAGE value="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has." />
+    <option name="LAST_COMMIT_MESSAGE" value="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has." />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/PlayList.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>71</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="user_store" language="Python" />

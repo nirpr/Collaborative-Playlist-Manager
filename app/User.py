@@ -25,10 +25,10 @@ class User:
     def __fetch_user_top_tracks_api(self, limit=20):
         try:
             response = self.__sp.current_user_top_tracks(limit)
-            tracks = [{"name": item["name"],
-                       "artist": item["artists"][0]["name"],
-                       "id": item["id"]}
-                      for item in response['items']]
+            tracks = {item["id"]: {"name": item["name"],
+                                   "artist": item["artists"][0]["name"],
+                                   "id": item["id"]}
+                      for item in response['items']}  # need to test
 
             return tracks
         except spotipy.exceptions.SpotifyException as e:
@@ -47,6 +47,11 @@ class User:
 
     def add_songs_in_manager(self, playlist_id, songs):
         self.__sp.playlist_add_items(playlist_id, songs)
+
+    def delete_chosen_songs(self, selected_songs):
+        for song in selected_songs:
+            if song["id"] in self.__user_top_tracks:
+                del self.__user_top_tracks[song["id"]]
 
     def show_remote_playlist(self, playlist_id):
         playlist_details = self.__sp.playlist(playlist_id)

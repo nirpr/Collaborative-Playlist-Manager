@@ -66,14 +66,17 @@ def generate_playlist():
 
     for user in selected_users:
         if len(user.get_user_top_tracks()) < num_of_songs_per_user:
-            num_of_songs_per_user = len(user.get_user_top_tracks())
-        selected_songs = sample(user.get_user_top_tracks(), num_of_songs_per_user)
+            selected_songs = sample(list(user.get_user_top_tracks().values()), len(user.get_user_top_tracks()))
+        else:
+            selected_songs = sample(list(user.get_user_top_tracks().values()), num_of_songs_per_user)  # test!
+        user.delete_chosen_songs(selected_songs)
+
         playlist.add_user_songs_to_playlist(selected_songs, user.get_user_id())
 
     return {'selected playlist': playlist.get_songs_dict()}
 
 
-@app.post("/upvote/{track_id}")
+@app.put("/upvote/{track_id}")
 def upvote_song(track_id):
 
     if track_id not in playlist.get_songs_dict():
@@ -93,7 +96,7 @@ def create_playlist_on_spotify():
         return {'exception thrown': str(e)}
 
 
-@app.post("/add_songs_to_playlist")
+@app.put("/add_songs_to_playlist")
 def add_songs_to_playlist():
     try:
         playlist.add_songs_to_remote_playlist()
