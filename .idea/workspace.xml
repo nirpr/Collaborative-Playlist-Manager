@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="frontend and backend works basically, still need to handle creating a remote playlist and continue to develop backend.">
+    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="some changes">
+      <change beforePath="$PROJECT_DIR$/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/PlayList.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/PlayList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,30 +53,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="run_server" type="PythonConfigurationType" factoryName="Python">
-      <module name="spotify_shared_playlist_by_votes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\nirpe\anaconda3\envs\collaborative_playlist\python.exe" />
-      <option name="SDK_NAME" value="collaborative_playlist" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/anaconda3/envs/collaborative_playlist/Scripts/uvicorn.exe" />
-      <option name="PARAMETERS" value="main:app --reload" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -159,7 +139,49 @@
       <option name="project" value="LOCAL" />
       <updated>1733072071681</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="deleted unnecessary comments">
+      <created>1733238356414</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733238356414</updated>
+    </task>
+    <task id="LOCAL-00013" summary="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch.">
+      <created>1733310380436</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733310380436</updated>
+    </task>
+    <task id="LOCAL-00014" summary="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user.">
+      <created>1733526199600</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733526199600</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has.">
+      <created>1733575194757</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733575194757</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Checked with 2 users with songs, added reorder by votes and made sure to delete chosen songs from user. also after creating the playlist in spotify we delete the local playlist for new entries.">
+      <created>1733821952031</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1733821952031</updated>
+    </task>
+    <task id="LOCAL-00017" summary="some changes">
+      <created>1736153018404</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1736153018404</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,27 +208,20 @@
     <MESSAGE value="tested and fixed multiple users, change the get_access_token method to not use cache. also changed the way I start the server, now we can use main.py directly and not a script." />
     <MESSAGE value="added basic frontend." />
     <MESSAGE value="now the client and server talks to each other but still has problems with redirecting after login." />
-    <option name="LAST_COMMIT_MESSAGE" value="now the client and server talks to each other but still has problems with redirecting after login." />
+    <MESSAGE value="deleted unnecessary comments" />
+    <MESSAGE value="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch." />
+    <MESSAGE value="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user." />
+    <MESSAGE value="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has." />
+    <MESSAGE value="Checked with 2 users with songs, added reorder by votes and made sure to delete chosen songs from user. also after creating the playlist in spotify we delete the local playlist for new entries." />
+    <MESSAGE value="some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some changes" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>31</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="user_store" language="Python" />
         <watch expression="playlist" language="Python" />
+        <watch expression="self" language="Python" />
       </configuration>
     </watches-manager>
   </component>
