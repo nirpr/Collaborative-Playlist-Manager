@@ -68,3 +68,6 @@ class PlayList:
     def show_remote_playlist(self):
         return self.__manager.show_remote_playlist(self.__playlist_id)
 
+    def is_manager(self, user):
+        return self.manager and self.manager.get_user_id() == user.get_user_id()
+
