@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has.">
+    <list default="true" id="6b2e43b2-b858-4813-be87-b0043a32f0a5" name="Changes" comment="Checked with 2 users with songs, added reorder by votes and made sure to delete chosen songs from user. also after creating the playlist in spotify we delete the local playlist for new entries.">
       <change beforePath="$PROJECT_DIR$/.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/PlayList.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/PlayList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1733575194757</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Checked with 2 users with songs, added reorder by votes and made sure to delete chosen songs from user. also after creating the playlist in spotify we delete the local playlist for new entries.">
+      <created>1733821952031</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1733821952031</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,27 +201,15 @@
     <MESSAGE value="changed methods in PlayList.py, now we can see songs name when requesting /playlist. also after we create remote playlist we delete our songs_dict for the next batch." />
     <MESSAGE value="changed the way songs are added to playlist, right now we have 10 songs where we have 10/number_of_users songs from each user." />
     <MESSAGE value="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has." />
-    <option name="LAST_COMMIT_MESSAGE" value="added a check in the request of generate_playlist to make sure we do not ask for more songs than the user has." />
+    <MESSAGE value="Checked with 2 users with songs, added reorder by votes and made sure to delete chosen songs from user. also after creating the playlist in spotify we delete the local playlist for new entries." />
+    <option name="LAST_COMMIT_MESSAGE" value="Checked with 2 users with songs, added reorder by votes and made sure to delete chosen songs from user. also after creating the playlist in spotify we delete the local playlist for new entries." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/PlayList.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="user_store" language="Python" />
         <watch expression="playlist" language="Python" />
+        <watch expression="self" language="Python" />
       </configuration>
     </watches-manager>
   </component>

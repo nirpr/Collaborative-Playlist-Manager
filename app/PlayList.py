@@ -1,6 +1,7 @@
 from app.User import User
 from collections import OrderedDict
 
+
 class PlayList:
     def __init__(self):
         self.__songs = {}
