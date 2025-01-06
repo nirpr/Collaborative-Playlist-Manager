@@ -17,7 +17,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-FRONTEND_URL = "http://127.0.0.1:8001/frontend"
+FRONTEND_URL = "http://127.0.0.1:8001/index.html"
 user_store = UserStore()
 playlist = PlayList()
 
@@ -25,8 +25,7 @@ playlist = PlayList()
 @app.get('/login')
 def login():
     auth_url = get_auth_url()
-    # return {"loginUrl": auth_url}
-    return RedirectResponse(url=auth_url)
+    return {"url": auth_url}
 
 
 @app.get("/callback")
@@ -38,10 +37,10 @@ def callback(code: str):
         playlist.set_manager(user)
 
     user_store.add_user(user)
-
-    # redirect_url = f"{FRONTEND_URL}?user_id={user.get_user_id()}"
-    # return RedirectResponse(url=redirect_url)
-    return {"successfully logged in": user.get_user_id()}
+    
+    # Redirect to frontend with user_id
+    redirect_url = f"{FRONTEND_URL}?user_id={user.get_user_id()}"
+    return RedirectResponse(url=redirect_url)
 
 
 @app.get("/playlist")

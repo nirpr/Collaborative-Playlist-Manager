@@ -1,111 +1,106 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const playlistList = document.getElementById('playlist-list');
-    const createPlaylistForm = document.getElementById('create-playlist-form');
-    const playlistNameInput = document.getElementById('playlist-name');
-    const playlistDescriptionInput = document.getElementById('playlist-description');
-    const backendUrl = "http://127.0.0.1:8000";
+    // Basic setup
+    const API_BASE_URL = 'http://127.0.0.1:8000';
+    
+    // Get DOM elements
+    const loginBtn = document.getElementById('loginBtn');
+    const userSection = document.getElementById('userSection');
+    const playlistContainer = document.getElementById('playlistContainer');
+    
+    // Add login click handler
+    if (loginBtn) {
+        loginBtn.addEventListener('click', async () => {
+            console.log('Login clicked');
+            try {
+                const response = await fetch(`${API_BASE_URL}/login`);
+                const data = await response.json();
+                console.log('Received login URL:', data.url);
+                window.location.href = data.url;
+            } catch (error) {
+                console.error('Error during login:', error);
+            }
+        });
+    }
 
+    // Check if we're logged in
     const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
     const userId = urlParams.get('user_id');
+    console.log('User ID from URL:', userId);
 
-    if (code) {
-        // Handle callback and send code to backend for processing
-        fetch(`${backendUrl}/callback?code=${code}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Login successful:', data);
-                const redirectUrl = `${window.location.origin}/frontend?user_id=${data.user_id}`;
-                window.location.href = redirectUrl; // Redirect to frontend with user_id
-            })
-            .catch(err => console.error('Error during callback:', err));
-    } else if (!userId) {
-        // Initiate login flow if user_id is not present
-        fetch(`${backendUrl}/login`)
-            .then(response => response.json())
-            .then(data => {
-                console.log('Redirecting to login:', data.loginUrl);
-                window.location.href = data.loginUrl; // Redirect to Spotify login
-            })
-            .catch(err => console.error('Error initiating login:', err));
-    } else {
-        // User is logged in, proceed to fetch and display playlist
-        console.log(`User ID: ${userId}`);
-        fetchPlaylist();
-    }
+    if (userId) {
+        // User is logged in, show playlist controls
+        loginBtn.style.display = 'none';
+        userSection.innerHTML += `
+            <button id="generateBtn" class="primary-btn">Generate Playlist</button>
+        `;
 
-    function fetchPlaylist() {
-        fetch(`${backendUrl}/playlist`)
-            .then(response => response.json())
-            .then(data => {
-                playlistList.innerHTML = ''; // Clear existing list
-                if (data.playlist && typeof data.playlist === 'object') {
-                    // Iterate over each song in the playlist dictionary
-                    for (const trackId in data.playlist) {
-                        const songData = data.playlist[trackId]; // {user_id: ..., votes: ...}
-    
-                        // Assuming you have a way to get the song's name and artist
-                        const songName = `Song Name for ${trackId}`;  // Replace with actual data
-                        const songArtist = `Artist for ${trackId}`;  // Replace with actual data
-    
-                        const li = document.createElement('li');
-                        li.textContent = `${songName} by ${songArtist} - Votes: ${songData.votes}`;
-                        const voteButton = createVoteButton(trackId);  // Use trackId here
-                        li.appendChild(voteButton);
-                        playlistList.appendChild(li);
-                    }
-                } else {
-                    console.error('Expected playlist to be an object:', data.playlist);
+        // Add generate button handler
+        const generateBtn = document.getElementById('generateBtn');
+        generateBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/generate_playlist`, {
+                    method: 'POST'
+                });
+                if (response.ok) {
+                    updatePlaylist();
                 }
-            })
-            .catch(err => console.error('Error fetching playlist:', err));
+            } catch (error) {
+                console.error('Error generating playlist:', error);
+            }
+        });
+
+        // Initial playlist load
+        updatePlaylist();
     }
-    
-    
 
-    // Create a new remote playlist
-    if (createPlaylistForm) {
-        createPlaylistForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const playlistData = {
-                name: playlistNameInput.value,
-                description: playlistDescriptionInput.value,
-                user_id: userId // Include user_id in the request
-            };
+    async function updatePlaylist() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/playlist`);
+            const data = await response.json();
+            console.log('Playlist data:', data);
+            displayPlaylist(data.playlist || {});
+        } catch (error) {
+            console.error('Error fetching playlist:', error);
+        }
+    }
 
-            fetch(`${backendUrl}/create_playlist`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(playlistData)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Remote playlist created!');
-                    playlistNameInput.value = '';
-                    playlistDescriptionInput.value = '';
-                    fetchPlaylist(userId); // Refresh the playlist
-                })
-                .catch(err => console.error('Error creating playlist:', err));
+    function displayPlaylist(playlist) {
+        if (!playlistContainer) return;
+
+        playlistContainer.innerHTML = '';
+        
+        // Use the playlist directly since it's already sorted
+        Object.entries(playlist).forEach(([trackId, song]) => {
+            const songElement = document.createElement('div');
+            songElement.className = 'song-card';
+            songElement.innerHTML = `
+                <div class="song-info">
+                    <div class="song-title">${song.name}</div>
+                    <div class="song-artist">${song.artist}</div>
+                </div>
+                <div class="vote-section">
+                    <span class="vote-count">${song.votes} votes</span>
+                    <button class="vote-btn" onclick="upvoteSong('${trackId}')">
+                        Upvote
+                    </button>
+                </div>
+            `;
+            playlistContainer.appendChild(songElement);
         });
     }
 
-    // Create vote button
-    function createVoteButton(trackId) {
-        const voteButton = document.createElement('button');
-        voteButton.textContent = 'Vote';
-        voteButton.addEventListener('click', () => {
-            fetch(`${backendUrl}/upvote/${trackId}`, {
-                method: 'POST'
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Song upvoted!');
-                    fetchPlaylist(userId); // Refresh the playlist
-                })
-                .catch(err => console.error('Error voting on song:', err));
-        });
-        return voteButton;
-    }
+    // Global function for upvoting
+    window.upvoteSong = async (trackId) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/upvote/${trackId}`, {
+                method: 'PUT'
+            });
+            if (response.ok) {
+                updatePlaylist();
+            }
+        } catch (error) {
+            console.error('Error upvoting song:', error);
+        }
+    };
 });
+
